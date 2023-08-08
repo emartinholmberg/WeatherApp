@@ -1,0 +1,108 @@
+﻿@model WeatherApp.Models.WeatherViewModel
+
+@functions {
+    // Funktion för att översätta engelska vädertermer till svenska
+    string TranslateWeatherDescription(string description)
+    {
+        switch (description.ToLower())
+        {
+            case "clear sky":
+                return "Klart";
+            case "few clouds":
+                return "Mestadels klart";
+            case "scattered clouds":
+                return "Delvis molnigt";
+            case "broken clouds":
+                return "Molnigt";
+            case "shower rain":
+                return "Regnskurar";
+            case "rain":
+                return "Regn";
+            case "thunderstorm":
+                return "Åska";
+            case "snow":
+                return "Snö";
+            case "mist":
+                return "Dimma";
+            case "light rain":
+                return "Lätt regn";
+            case "overcast clouds":
+                return "Mulet väder";
+            default:
+                return description;
+        }
+    }
+
+    // Funktion för att bestämma bild baserat på väderbeskrivning
+    string GetWeatherImage(string description)
+    {
+        switch (description.ToLower())
+        {
+            case "clear sky":
+                return "sol.png";
+            case "scattered clouds":
+            case "broken clouds":
+            case "overcast clouds":
+                return "moln.png";
+            case "shower rain":
+            case "rain":
+            case "light rain":
+                return "regn.png";
+            default:
+                return "halvklart.png";
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Väderprognos</title>
+</head>
+<body>
+    <h1>5-dagars väderprognos för Stockholm</h1>
+    @if (ViewData["ErrorMessage"] != null)
+    {
+        <p>@ViewData["ErrorMessage"]</p>
+    }
+    else
+    {
+        @foreach (var group in Model.ForecastList.GroupBy(item => FormatDate(item.Dt)))
+        {
+            <h2>@group.Key</h2>
+            <table>
+                <tr>
+                    <th>Tid</th>
+                    <th>Temperatur (°C)</th>
+                    <th>Väder</th>
+                    <th>Väderbeskrivning</th>
+                </tr>
+                @foreach (var forecastItem in group)
+                {
+                    <tr>
+                        <td>@FormatTime(forecastItem.Dt)</td>
+                        <td>@forecastItem.Main?.Temp.ToString("0.0")</td>
+                        <td><img class="weather-icon" src="@Url.Content($"~/images/{GetWeatherImage(forecastItem.Weather?[0]?.Description)}")" alt="Väderbild" /></td>
+                        <td>@TranslateWeatherDescription(forecastItem.Weather?[0]?.Description)</td>
+                    </tr>
+                }
+            </table>
+        }
+    }
+
+    <!-- Skriv ut datum och tid i rätt format -->
+    @functions {
+        string FormatDate(long unixTimestamp)
+        {
+            var date = DateTimeOffset.FromUnixTimeSeconds(unixTimestamp).ToLocalTime();
+            return date.ToString("yyyy-MM-dd");
+        }
+
+        string FormatTime(long unixTimestamp)
+        {
+            var date = DateTimeOffset.FromUnixTimeSeconds(unixTimestamp).ToLocalTime();
+            return date.ToString("HH:mm");
+        }
+    }
+</body>
+</html>
