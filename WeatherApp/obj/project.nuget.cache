@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "x30xMDL5yirZe02yTeQtmzxvv0YLqfH7bhsj436ze8ZC1DEgOAr0UvhvBePPAweizlwswm/lHxsAnDFXXm+tdw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\TEMHG\\source\\repos\\emartinholmberg\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\TEMHG\\.nuget\\packages\\chart.js\\3.7.1\\chart.js.3.7.1.nupkg.sha512",
+    "C:\\Users\\TEMHG\\.nuget\\packages\\moment.js\\2.29.4\\moment.js.2.29.4.nupkg.sha512",
+    "C:\\Users\\TEMHG\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

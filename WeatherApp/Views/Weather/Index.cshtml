@@ -28,6 +28,8 @@
                 return "Lätt regn";
             case "overcast clouds":
                 return "Mulet väder";
+            case "moderate rain":
+                return "Delvis regn";
             default:
                 return description;
         }
@@ -39,6 +41,7 @@
         switch (description.ToLower())
         {
             case "clear sky":
+            case "few clouds":
                 return "sol.png";
             case "scattered clouds":
             case "broken clouds":
@@ -47,6 +50,7 @@
             case "shower rain":
             case "rain":
             case "light rain":
+            case "moderate rain":
                 return "regn.png";
             default:
                 return "halvklart.png";
