@@ -2,6 +2,11 @@
 using Newtonsoft.Json.Linq;
 using WeatherApp.Models;
 
+//Välja stad med ett inputfält, sen kommer man till sidan med vädret för den staden
+//Kollapsa alla dagar förutom idag
+//Klicka på en dag för att expandera den och se vädret för var 3:e timme
+//Skriv ut datum och sen veckodag (rubriken)
+
 namespace WeatherApp.Controllers
 {
     public class WeatherController : Controller
