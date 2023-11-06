@@ -64,14 +64,20 @@
     <title>Väderprognos</title>
 </head>
 <body>
-    <h1>5-dagars väderprognos för Stockholm</h1>
+    <h1>5-dagars väderprognos i @ViewData["City"] </h1>
+
+    <form method="get">
+        <input type="text" name="city" placeholder="Ange stad" />
+        <button type="submit">Se väder</button>
+    </form>
+
     @if (ViewData["ErrorMessage"] != null)
     {
         <p>@ViewData["ErrorMessage"]</p>
     }
     else
     {
-        @foreach (var group in Model.ForecastList.GroupBy(item => FormatDate(item.Dt)))
+        @foreach (var group in Model.ForecastList!.GroupBy(item => FormatDate(item.Dt)))
         {
             <h2>@group.Key</h2>
             <table>
@@ -86,8 +92,8 @@
                     <tr>
                         <td>@FormatTime(forecastItem.Dt)</td>
                         <td>@forecastItem.Main?.Temp.ToString("0.0")</td>
-                        <td><img class="weather-icon" src="@Url.Content($"~/images/{GetWeatherImage(forecastItem.Weather?[0]?.Description)}")" alt="Väderbild" /></td>
-                        <td>@TranslateWeatherDescription(forecastItem.Weather?[0]?.Description)</td>
+                        <td><img class="weather-icon" src="@Url.Content($"~/images/{GetWeatherImage(forecastItem.Weather?[0]?.Description!)}")" alt="Väderbild" /></td>
+                        <td>@TranslateWeatherDescription(forecastItem.Weather?[0]?.Description!)</td>
                     </tr>
                 }
             </table>

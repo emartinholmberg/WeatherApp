@@ -14,7 +14,7 @@ namespace WeatherApp
                 try
                 {
                     var weatherController = services.GetRequiredService<WeatherController>();
-                    var result = weatherController.Index().Result;
+                    var result = weatherController.Index(city: "Stockholm").Result;
                 }
                 catch (Exception ex)
                 {

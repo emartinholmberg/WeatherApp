@@ -20,13 +20,21 @@ namespace WeatherApp.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string city)
         {
             try
             {
+                // If the 'city' parameter is empty, use a default city (e.g., Stockholm)
+                if (string.IsNullOrEmpty(city))
+                {
+                    city = "Stockholm";
+                }
+
+                 ViewData["City"] = city;
+
                 var httpClient = _httpClientFactory.CreateClient();
 
-                var apiUrl = $"{_baseUrl}?q=Stockholm,SE&appid={_apiKey}&units=metric";
+                var apiUrl = $"{_baseUrl}?q={city}&appid={_apiKey}&units=metric";
 
                 var response = await httpClient.GetStringAsync(apiUrl);
                 var forecastData = JObject.Parse(response);
@@ -44,5 +52,6 @@ namespace WeatherApp.Controllers
                 return View();
             }
         }
+
     }
 }
