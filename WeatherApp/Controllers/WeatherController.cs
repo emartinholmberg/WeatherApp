@@ -47,7 +47,7 @@ namespace WeatherApp.Controllers
             }
             catch (Exception)
             {
-                ViewData["ErrorMessage"] = "An error occurred while fetching weather data.";
+                ViewData["ErrorMessage"] = $"Ops, {city} hittades inte, prova gärna en annan stad";
                 return View();
             }
         }
