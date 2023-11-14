@@ -67,14 +67,120 @@
 <html>
 <head>
     <title>Väderprognos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+            margin-top: 20px;
+            background-color: ghostwhite
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 36px;
+            color: #3498db;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .center-form {
+            text-align: center;
+        }
+
+        form {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .collapsible {
+            color: darkgoldenrod;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+            .collapsible:hover {
+                background-color: #8e44ad;
+            }
+
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .content {
+            display: none;
+            padding: 0 18px;
+            overflow: hidden;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-top: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        img.weather-icon {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+        }
+
+        h2 {
+            margin-top: 25px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        html {
+            font-size: 14px;
+        }
+
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            margin-bottom: 60px;
+        }
+    </style>
 </head>
 <body>
-    <h1>5-dagars väderprognos i @ViewData["City"] </h1>
+    <h1 class="header">5-dagars väderprognos i @ViewData["City"] </h1>
 
-    <form method="get">
-        <input type="text" name="city" placeholder="Ange stad" />
-        <button type="submit">Se väder</button>
-    </form>
+    <div class="center-form">
+        <form method="get">
+            <input type="text" name="city" placeholder="Ange stad" />
+            <button type="submit">Se väder</button>
+        </form>
+    </div>
 
     @if (ViewData["ErrorMessage"] != null)
     {
@@ -82,31 +188,45 @@
     }
     else
     {
-        @foreach (var group in Model.ForecastList!.GroupBy(item => FormatDate(item.Dt)))
+        @foreach (var group in Model.ForecastList!.GroupBy(item => FormatDate(item.Dt)).OrderBy(g => g.Key))
         {
-            <h2>@group.Key</h2>
-            <table>
-                <tr>
-                    <th>Tid</th>
-                    <th>Temperatur (°C)</th>
-                    <th>Väder</th>
-                    <th>Väderbeskrivning</th>
-                </tr>
-                @foreach (var forecastItem in group)
-                {
+            var dateGroup = group.First();
+            <button class="collapsible">@FormatDateTime(dateGroup.Dt)</button>
+            <div class="content">
+                <table>
                     <tr>
-                        <td>@FormatTime(forecastItem.Dt)</td>
-                        <td>@forecastItem.Main?.Temp.ToString("0.0")</td>
-                        <td><img class="weather-icon" src="@Url.Content($"~/images/{GetWeatherImage(forecastItem.Weather?[0]?.Description!)}")" alt="vaderbild" /></td>
-                        <td>@TranslateWeatherDescription(forecastItem.Weather?[0]?.Description!)</td>
+                        <th>Time</th>
+                        <th>Temperature (°C)</th>
+                        <th>Weather</th>
+                        <th>Weather Description</th>
                     </tr>
-                }
-            </table>
+                    @foreach (var forecastItem in group)
+                    {
+                        <tr>
+                            <td>@FormatTime(forecastItem.Dt)</td>
+                            <td>@forecastItem.Main?.Temp.ToString("0.0")</td>
+                            <td><img class="weather-icon" src="@Url.Content($"~/images/{GetWeatherImage(forecastItem.Weather?[0]?.Description!)}")" alt="vaderbild" /></td>
+                            <td>@TranslateWeatherDescription(forecastItem.Weather?[0]?.Description!)</td>
+                        </tr>
+                    }
+                </table>
+            </div>
         }
-    }
 
-    <!-- Skriv ut datum och tid i rätt format -->
-    @functions {
+        <!-- Skriv ut datum och tid i rätt format -->
+        @functions {
+        string FormatDateTime(long unixTimestamp)
+        {
+            var date = DateTimeOffset.FromUnixTimeSeconds(unixTimestamp).ToLocalTime();
+            return date.ToString("dddd, yyyy-MM-dd");
+        }
+
+        string FormatWeekday(long unixTimestamp)
+        {
+            var date = DateTimeOffset.FromUnixTimeSeconds(unixTimestamp).ToLocalTime();
+            return date.ToString("dddd");
+        }
+
         string FormatDate(long unixTimestamp)
         {
             var date = DateTimeOffset.FromUnixTimeSeconds(unixTimestamp).ToLocalTime();
@@ -119,5 +239,28 @@
             return date.ToString("HH:mm");
         }
     }
+    }
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                    }
+                });
+            }
+
+            coll[0].classList.add("active");
+            coll[0].nextElementSibling.style.display = "block";
+        });
+    </script>
 </body>
 </html>
