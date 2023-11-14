@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/fDiSt11OYamjFWmAvW5kxtgYcojRa745MjidgrsaPk=",
+  "Hash": "1g36sDWCxZ6Wm+N9lRvE7yohxBsbwp9AqCQYvs2pJxk=",
   "Source": "WeatherApp",
   "BasePath": "_content/WeatherApp",
   "Mode": "Default",
@@ -136,6 +136,23 @@
       "OriginalItemSpec": "wwwroot\\images\\regn.png"
     },
     {
+      "Identity": "C:\\Users\\TEMHG\\source\\repos\\emartinholmberg\\WeatherApp\\WeatherApp\\wwwroot\\images\\sno.png",
+      "SourceId": "WeatherApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\TEMHG\\source\\repos\\emartinholmberg\\WeatherApp\\WeatherApp\\wwwroot\\",
+      "BasePath": "_content/WeatherApp",
+      "RelativePath": "images/sno.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\sno.png"
+    },
+    {
       "Identity": "C:\\Users\\TEMHG\\source\\repos\\emartinholmberg\\WeatherApp\\WeatherApp\\wwwroot\\images\\sol.png",
       "SourceId": "WeatherApp",
       "SourceType": "Discovered",
@@ -151,6 +168,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\sol.png"
+    },
+    {
+      "Identity": "C:\\Users\\TEMHG\\source\\repos\\emartinholmberg\\WeatherApp\\WeatherApp\\wwwroot\\images\\vaderbild.png",
+      "SourceId": "WeatherApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\TEMHG\\source\\repos\\emartinholmberg\\WeatherApp\\WeatherApp\\wwwroot\\",
+      "BasePath": "_content/WeatherApp",
+      "RelativePath": "images/vaderbild.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\vaderbild.png"
     },
     {
       "Identity": "C:\\Users\\TEMHG\\source\\repos\\emartinholmberg\\WeatherApp\\WeatherApp\\wwwroot\\js\\site.js",

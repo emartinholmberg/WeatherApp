@@ -52,8 +52,13 @@
             case "light rain":
             case "moderate rain":
                 return "regn.png";
+            case "thunderstorm":
+                return "åska.png";
+            case "snow":
+            case "light snow":
+                return "sno.png";
             default:
-                return "halvklart.png";
+                return "vaderbild.png";
         }
     }
 }
@@ -92,7 +97,7 @@
                     <tr>
                         <td>@FormatTime(forecastItem.Dt)</td>
                         <td>@forecastItem.Main?.Temp.ToString("0.0")</td>
-                        <td><img class="weather-icon" src="@Url.Content($"~/images/{GetWeatherImage(forecastItem.Weather?[0]?.Description!)}")" alt="Väderbild" /></td>
+                        <td><img class="weather-icon" src="@Url.Content($"~/images/{GetWeatherImage(forecastItem.Weather?[0]?.Description!)}")" alt="vaderbild" /></td>
                         <td>@TranslateWeatherDescription(forecastItem.Weather?[0]?.Description!)</td>
                     </tr>
                 }

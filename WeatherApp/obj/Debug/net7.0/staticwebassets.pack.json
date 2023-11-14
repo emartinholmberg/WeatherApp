@@ -25,8 +25,16 @@
       "PackagePath": "staticwebassets\\images\\regn.png"
     },
     {
+      "Id": "C:\\Users\\TEMHG\\source\\repos\\emartinholmberg\\WeatherApp\\WeatherApp\\wwwroot\\images\\sno.png",
+      "PackagePath": "staticwebassets\\images\\sno.png"
+    },
+    {
       "Id": "C:\\Users\\TEMHG\\source\\repos\\emartinholmberg\\WeatherApp\\WeatherApp\\wwwroot\\images\\sol.png",
       "PackagePath": "staticwebassets\\images\\sol.png"
+    },
+    {
+      "Id": "C:\\Users\\TEMHG\\source\\repos\\emartinholmberg\\WeatherApp\\WeatherApp\\wwwroot\\images\\vaderbild.png",
+      "PackagePath": "staticwebassets\\images\\vaderbild.png"
     },
     {
       "Id": "C:\\Users\\TEMHG\\source\\repos\\emartinholmberg\\WeatherApp\\WeatherApp\\wwwroot\\js\\site.js",
